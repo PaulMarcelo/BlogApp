@@ -1,12 +1,8 @@
 package ec.com.pmyb.blogapp.data.model
 
-import com.google.firebase.firestore.ServerTimestamp
-import java.util.*
+import com.google.firebase.Timestamp
 
 data class Post(val profile_picture: String = "",
                 val profile_name: String = "",
-                @ServerTimestamp
-                var created_at: Date? = null,
-                val post_image: String = "",
-                val post_description: String = "",
-                val uid: String = "")
+                var post_timestamp: Timestamp? = null,
+                val post_image: String = "")
