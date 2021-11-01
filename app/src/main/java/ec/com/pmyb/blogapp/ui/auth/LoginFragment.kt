@@ -8,13 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import ec.com.pmyb.blogapp.R
-import ec.com.pmyb.blogapp.core.Resource
-import ec.com.pmyb.blogapp.data.remote.auth.LoginDataSource
+import ec.com.pmyb.blogapp.data.remote.auth.AuthDataSource
 import ec.com.pmyb.blogapp.databinding.FragmentLoginBinding
-import ec.com.pmyb.blogapp.domain.auth.LoginRepoImpl
-import ec.com.pmyb.blogapp.presentation.auth.LoginScreenViewModel
-import ec.com.pmyb.blogapp.presentation.auth.LoginScreenViewModelFactory
-import ec.com.pmyb.blogapp.ui.home.adapter.HomeScreenAdapter
+import ec.com.pmyb.blogapp.domain.auth.AuthRepoImpl
+import ec.com.pmyb.blogapp.presentation.auth.AuthViewModel
+import ec.com.pmyb.blogapp.presentation.auth.AuthViewModelFactory
+import ec.com.pmyb.blogapp.core.Result
 
 /**
  * A simple [Fragment] subclass.
@@ -25,10 +24,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val viewModel by viewModels<LoginScreenViewModel> {
-        LoginScreenViewModelFactory(
-            LoginRepoImpl(
-                LoginDataSource()
+    private val viewModel by viewModels<AuthViewModel> {
+        AuthViewModelFactory(
+            AuthRepoImpl(
+                AuthDataSource()
             )
         )
     }
@@ -38,6 +37,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         this.binding = FragmentLoginBinding.bind(view)
         this.isUserLogenIn()
         this.doLogin()
+        this.goToSignUpPage()
     }
 
     private fun isUserLogenIn() {
@@ -55,6 +55,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
+    private fun goToSignUpPage(){
+        binding.txtSignup.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+    }
+
     private fun validateCredentials(email: String, password: String) {
         if (email.isEmpty()) {
             binding.editTextEmail.error = "E-mail is empty"
@@ -69,15 +75,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun signIn(email: String, password: String) {
         viewModel.signIn(email, password).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> {
+                is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.btnSignin.isEnabled = false
                 }
-                is Resource.Success -> {
+                is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     findNavController().navigate(R.id.action_loginFragment_to_homeScreenFragment)
                 }
-                is Resource.Failure -> {
+                is Result.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnSignin.isEnabled = true
                     Toast.makeText(

@@ -3,18 +3,18 @@ package ec.com.pmyb.blogapp.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
-import ec.com.pmyb.blogapp.core.Resource
+import ec.com.pmyb.blogapp.core.Result
 import ec.com.pmyb.blogapp.domain.home.HomeScreenRepo
 import kotlinx.coroutines.Dispatchers
 
 class HomeScreenViewModel(private val repo: HomeScreenRepo) : ViewModel() {
     fun fetchLatesPosts() = liveData(Dispatchers.IO) {
-        emit(Resource.Loading())
+        emit(Result.Loading())
         try {
             //emit(Resource.Success(repo.geLatesPosts()))
             emit(repo.geLatesPosts())
         } catch (e: Exception) {
-            emit(Resource.Failure(e))
+            emit(Result.Failure(e))
         }
     }
 }
