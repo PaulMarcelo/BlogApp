@@ -4,14 +4,29 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1140625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1140625" />
+        <entry key="app/src/main/res/drawable/ic_filled_heart.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/drawable/ic_outline_heart.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home_screen.xml" value="0.1539855072463768" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.16530797101449277" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.15729166666666666" />
+        <entry key="app/src/main/res/layout/fragment_setup_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/post_item_view.xml" value="0.1539855072463768" />
+        <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="BlogApp.app" />
+      </set>
+    </option>
+  </component>
 </project>
